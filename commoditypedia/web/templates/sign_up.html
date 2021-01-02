@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+
+
+<br>
+<div class="box">
+  <h2>
+    ثبت نام
+  </h2>
+  <form action="{% url 'web:register' %}" method="POST" name="register">
+    {% csrf_token %}
+
+    <label for="username">نام کاربری</label>
+    {{sign_up_form.username}}
+
+    <label for="username">ایمیل</label>
+    {{sign_up_form.email}}
+
+    <label for="password">رمز عبور</label>
+    {{sign_up_form.password}}
+
+    {{sign_up_form.submit}}
+  </form>
+  <p>
+    قبلا حساب ایجاد کرده اید؟
+    <a href="{% url 'web:sign_in' %}" id="signup">وارد شوید.</a>
+  </p>
+  {% if messages %}
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  {% endif %}
+
+</div>
+<br>
+{% endblock %}

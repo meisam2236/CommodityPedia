@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container">
+  <br>
+  <div class="box">
+    <h2>
+      اطلاعات تکمیلی
+    </h2>
+    <div id="js-map" class="map map-size"></div>
+
+    <form action="{% url 'web:user_infos' %}" method="POST" name="user_infos" enctype="multipart/form-data" id="form">
+      {% csrf_token %}
+
+      <label for="customer">مشتری</label>
+      {{user_infos_form.customer}}
+
+      <label for="sex">جنسیت</label>
+      {{user_infos_form.sex}}
+
+      <label for="username">نام کامل(به فارسی)</label>
+      {{user_infos_form.full_name}}
+
+      <label for="job">شغل</label>
+      {{user_infos_form.job}}
+
+      <label for="bio">توضیحات</label>
+      {{user_infos_form.bio}}
+
+      <label for="phone_number">شماره موبایل</label>
+      {{user_infos_form.phone_number}}
+
+      <label for="birth_date">تاریخ تولد</label>
+      {{user_infos_form.birth_date}}
+
+      <label for="image">تصویر</label>
+      {{user_infos_form.image}}
+      
+      {{user_infos_form.address_lon}}
+      {{user_infos_form.address_lat}}
+
+      {{user_infos_form.submit}}
+    </form>
+  </div>
+  <br>
+</div>
+
+{% endblock %}

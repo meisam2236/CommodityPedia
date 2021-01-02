@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container">
+    <div class="search-box btns padding-t">
+        <div class="r-btn">
+            <a href="{% url 'web:search_user' %}">کاربر</a>
+        </div>
+        <div class="l-btn btn-active">
+            <a href="{% url 'web:search_commodity' %}" class="a-active">محصول</a>
+        </div>
+    </div>
+    <div class="search-box">
+        <input type="text" id="search" name="search" placeholder="جستجو">
+    </div>
+    <br>
+    <div class="box">
+        {% if commodities %}
+        <div class="commodities-box">
+            {% for stuff in commodities %}
+            <img class="commodities-img" src="{{stuff.image}}">
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="p-center">محصولی برای نمایش وجود ندارد!</p>
+        {% endif %}
+    </div>
+    <br>
+</div>
+{% endblock %}

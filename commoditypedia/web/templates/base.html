@@ -1,0 +1,81 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>دایرالکالا</title>
+
+{% if css_name == "home" %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home_styles.css' %}">
+    <script src="{% static 'js/home.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+{% endif %}
+
+{% if css_name == "sign_in" or css_name == "sign_up" or css_name == "user_infos" %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms_style.css' %}">
+{% endif %}
+
+{% if css_name == "user_infos" %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms_style.css' %}">
+    <link rel="stylesheet" href="{% static 'js/openlayer-v6.4.3/ol.css' %}">
+    <script src="{% static 'js/openlayer-v6.4.3/ol.js' %}"></script>
+{% endif %}
+
+{% if css_name == "add" %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/forms_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_styles.css' %}">
+{% endif %}
+
+{% if css_name == "profile" %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'js/openlayer-v6.4.3/ol.css' %}">
+{% endif %}
+
+{% if css_name == "search" %}
+    <link rel="stylesheet" href="{% static 'css/search_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar_styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endif %}
+</head>
+
+
+<body style="margin: 0;">
+
+    {% if  css_name != "sign_in" and css_name != "sign_up" and css_name != "user_infos" %}
+    <div class="nav-col">
+        <div class="nav-row">
+            <a href="{% url 'web:home' %}" class="{{ home_page }}">دایرالکالا</a>
+            <a href="{% url 'web:search_user' %}" class="{{ search }}">جستجو</a>
+            {% if not user.is_authenticated %}
+            <a href="{% url 'web:sign_up' %}">ثبت نام</a>
+            <a href="{% url 'web:sign_in' %}" class="button">ورود</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a href="{% url 'web:add' %}" class="{{ add }}">افزودن کالا</a>
+            <a href="{% url 'web:profile' %}" class="{{ profile_page }}">نمایه</a>
+            <a href="{% url 'web:log_out' %}">خروج</a>
+            {% endif %}
+        </div>
+        <div class="faded-hr"></div>
+    </div>
+    {% endif %}
+
+    {% block content %}
+    {% endblock %}
+
+    {% if css_name == "user_infos" %}
+        <script src="{% static 'js/map.js' %}"></script>
+    {% endif %} 
+
+</body>
+
+</html>
+

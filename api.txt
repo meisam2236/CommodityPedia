@@ -1,0 +1,4 @@
+{
+    "commodity_api": "http://localhost:8080/api/commodity_api/",
+    "user_api": "http://localhost:8080/api/custom_user_api"
+}

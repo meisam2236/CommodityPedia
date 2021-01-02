@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container">
+    <div class="search-box btns  padding-t">
+        <div class="r-btn btn-active">
+            <a href="{% url 'web:search_user' %}" class="a-active">کاربر</a>
+        </div>
+        <div class="l-btn">
+            <a href="{% url 'web:search_commodity' %}">محصول</a>
+        </div>
+    </div>
+    <div class="search-box">
+        <input type="text" id="search" name="search" placeholder="جستجو">
+    </div>
+    <br>
+    <div class="box">
+        {% if users %}
+        {% for user in users %}
+        <div class="user">
+            <img class="rounded-image"
+                src="{% if user.customuser.image %}{{user.customuser.image}}{% else %}{% static 'images/avatar.png' %}{% endif %}">
+            <p>{{user.username}}</p>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="p-center">کاربری برای نمایش وجود ندارد!</p>
+        {% endif %}
+    </div>
+    <br>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+.venv/
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+.DS_Store
+commoditypedia/media/profile_images/
+commoditypedia/media/
+commoditypedia/database/migrations

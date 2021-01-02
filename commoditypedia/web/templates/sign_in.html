@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+
+<br>
+<div class="box">
+  <h2>
+    ورود
+  </h2>
+  <form action="{% url 'web:login' %}" method="POST" name="login">
+    {% csrf_token %}
+
+    <label for="username">نام کاربری</label>
+    {{sign_in_form.username}}
+
+    <label for="password">رمز عبور</label>
+    {{sign_in_form.password}}
+
+    {{sign_in_form.submit}}
+  </form>
+  <p>
+    ثبت نام نکرده اید؟
+    <a href="{% url 'web:sign_up' %}" id="signup">حساب کاربری ایجاد کنید.</a>
+  </p>
+  {% if messages %}
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  {% endif %}
+</div>
+<br>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class="box">
+        <img class="rounded-image"
+            src="{% if user.customuser.image %}{{user.customuser.image}}{% else %}{% static 'images/avatar.png' %}{% endif %}">
+        <div class="user-info">
+            <a class="edit-a" href="{% url 'web:user_infos' %}"><p class="edit-p">تغییر مشخصات</p></a>
+            <p class="title">{{user.customuser.full_name}}{% if user.customuser.full_name and user.customuser.job %} | {% endif %}{{user.customuser.job}}</p>
+            <p>{{user.customuser.bio}}</p>
+            {% if user.customuser.address_lat %}
+            <div id="js-map" class="map map-size"></div>
+            {% endif %}
+            {% if stuff %}
+            <div class="commodities-box">
+                {% for pic in stuff %}
+                <img class="commodities-img" src="{{pic.0}}">
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>کالایی موجود نیست!</p>
+            {% endif %}
+            <p>{{user.username}}@</p>
+        </div>
+    </div>
+</div>
+<br>
+<script src="{% static 'js/openlayer-v6.4.3/ol.js' %}"></script>
+<script type="text/javascript">
+    address_lat = {{ user.customuser.address_lat }};
+    address_lon = {{ user.customuser.address_lon }};
+    const map = new ol.Map({
+        view: new ol.View({
+            center: [address_lat, address_lon],
+            zoom: 16,
+            minZoom: 4
+        }),
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        target: 'js-map'
+    })
+    // marker
+    var layer = new ol.layer.Vector({
+        source: new ol.source.Vector({
+            features: [
+                new ol.Feature({
+                    geometry: new ol.geom.Point([address_lat, address_lon])
+                })
+            ]
+        })
+    });
+    map.addLayer(layer);
+</script>
+{% endblock %}

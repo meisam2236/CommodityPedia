@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container">
+    <div class="search-box">
+        <input type="text" id="search" name="search" placeholder="جستجو">
+    </div>
+    <div class="search-box btns">
+        <div class="r-btn btn-active">
+            <a href="{% url 'web:search_user' %}" class="p-active">گاربر</a>
+        </div>
+        <div class="l-btn">
+            <a href="{% url 'web:search_commodity' %}" class="p-active">محصول</a>
+        </div>
+    </div>
+    <br>
+    {% block content %}
+    {% endblock %}
+    <br>
+</div>
+{% endblock %}

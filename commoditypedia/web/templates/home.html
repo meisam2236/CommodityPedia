@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br>
+    {% if all_items %}
+    {% for stuff in all_items %}
+    <div class="post">
+        <div class="user">
+            <img class="rounded-image"
+                src="{% if stuff.user.customuser.image %}{{stuff.user.customuser.image}}{% else %}{% static 'images/avatar.png' %}{% endif %}">
+            <p>{{stuff.user.username}}</p>
+        </div>
+        <img class="commodity-image" src="{{stuff.image}}">
+        <div class="title">
+            <div class="point-row">
+                <form class="point-col" method="post">
+                    {% csrf_token %}
+                    <button onClick="ajaxLike();" type="submit" name="stuff_id" value="{{ stuff.id }}"
+                        class="like-button"><img class="like-img" src="{% static 'images/like.png' %}">
+                    </button>
+                </form>
+
+                <script>
+                    function ajaxLike() {
+                        $.ajax({
+                            url: "{% url 'web: like_stuff' stuff.pk %}",
+                            type: 'POST',
+                            data: {
+                                stuff_id: {{ stuff.id }},
+        },
+                    success: function(responseData) {
+                        alert(1);
+                    }
+    });
+    
+}
+                </script>
+
+                <p>
+                    <script> numToPersianWithCommaSeperator('{{ stuff.total_likes }}');</script> امتیاز</p>
+            </div>
+            <p class="commodity-name">{{stuff.title}}</p>
+            <p>
+                <script> numToPersianWithCommaSeperator('{{ stuff.price }}'); </script> تومان</p>
+        </div>
+        <p>{{stuff.description}}</p>
+        <p class="gray-text">
+            <script>
+                dateConvert('{{ stuff.date.isoformat }}');
+            </script>
+        </p>
+        <div>
+            <p class="comments-title">دیدگاه ها</p>
+            {% if user.is_authenticated %}
+            <form action="{% url 'web:comment_stuff' stuff.pk %}" method="POST" class="point-col">
+                {% csrf_token %}
+                <div style="display: flex; flex-direction: column;">
+                    {{comment_form.body}}
+                    <button type="submit" name="stuff_id" value="{{ stuff.id }}" class="comment-button">ارسال دیدگاه
+                    </button>
+                </div>
+            </form>
+            {% else %}
+            <p class="p-center">برای افزودن دیدگاه وارد شوید!</p>
+            {% endif %}
+            {% if stuff.comments.all %}
+            {% for comment in stuff.comments.all %}
+            <div class="comment-div">
+                <p>@{{comment.user.username}}</p>
+                <p>
+                    <script>
+                        dateConvert('{{ comment.date_added.isoformat }}');
+                    </script>
+                </p>
+            </div>
+            <p>{{comment.body}}</p>
+            <hr width="50%">
+            {% endfor %}
+            {% else %}
+            <p class="p-center">دیدگاهی وجود ندارد...</p>
+            {% endif %}
+        </div>
+    </div>
+    <br>
+    {% endfor %}
+    {% else %}
+    <p class="p-center">کالایی برای نمایش وجود ندارد!</p>
+    {% endif %}
+</div>
+{% endblock %}

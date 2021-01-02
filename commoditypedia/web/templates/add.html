@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load widget_tweaks %}
+
+<div class="container">
+  <br>
+  <div class="box">
+    <h2>
+      ارسال محصول
+    </h2>
+    <form action="{% url 'web:add' %}" method="POST" name="add" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="title">عنوان</label>
+      {{add_form.title}}
+
+      <label for="price">قیمت</label>
+      {{add_form.price}}
+
+      <label for="description">توضیحات</label>
+      {{add_form.description}}
+
+      <label for="image">تصویر</label>
+      {{add_form.image}}
+
+      {{add_form.submit}}
+    </form>
+    {% if messages %}
+    {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+    {% endif %}
+  </div>
+  <br>
+</div>
+{% endblock %}

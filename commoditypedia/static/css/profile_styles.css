@@ -1,0 +1,73 @@
+.container {
+    padding-top: 60px;
+}
+
+.box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rounded-image {
+    border-radius: 50%;
+    margin-bottom: -40px;
+    width: 80px;
+    z-index: 1;
+}
+
+.user-info {
+    background-color: white;
+    width: 600px;
+    border-radius: 50px;
+    padding: 20px 0 20px 0;
+    box-shadow: 0px 0px 40px 1px rgba(0, 0, 0, 0.25);
+    /* 0px horizontal length 
+       0px vertical length
+       40px blur radius
+       1px spread radius */
+}
+
+.user-info p {
+    font-family: "Vazir", Times, serif;
+    text-align: center;
+    direction: rtl;
+}
+
+.title {
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.commodities-box {
+    display: flex;
+    flex-flow: row-reverse wrap;
+}
+
+.commodities-img {
+    width: 33.33%;
+    height: 33.33%;
+}
+
+.map-size {
+    width: 100%;
+    height: 200px;
+}
+
+.edit-a {
+    font-family: "Vazir", Times, serif;
+    font-size: small;
+    text-decoration: none;
+}
+
+.edit-p {
+    padding-top: 6px;
+}
+
+@media (max-width: 700px) {
+    .user-info {
+        width: 90%;
+    }
+    .rounded-image {
+        width: 12%;
+    }
+}

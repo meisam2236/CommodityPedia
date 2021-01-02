@@ -1,0 +1,54 @@
+.nav-col
+{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    z-index: 500;
+    width: 100%;
+}
+.nav-row
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 8px 0 8px 0;
+    background-color: white;
+}
+.nav-row a
+{
+    font-family: "Vazir", Times, serif;
+    text-decoration: none;
+    color: rgb(128, 128, 128);
+}
+.nav-row a:hover
+{
+    color: rgb(30, 30, 30);
+}
+.nav-row a.active
+{
+    color: black;
+    font-weight: bolder;
+}
+.button
+{
+    border-radius: 30px;
+    background-color: gold;
+    padding: 10px 30px 10px 30px;
+}
+.button:hover
+{
+    background-color: rgb(236, 201, 0);
+}
+.faded-hr{
+    height: 1px;
+    background-color: #E6E6E6;
+    width: 100%;
+    margin: 0 auto;
+    background-image: linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -o-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -moz-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -ms-linear-gradient(left , white 2%, #E6E6E6 50%, white 98%);
+    background-image: -webkit-gradient( linear, left bottom, right bottom, color-stop(0.02, white), color-stop(0.5, gray), color-stop(0.98, white) );
+}
