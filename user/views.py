@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+from user.models import CustomUser
 from user.serializers import UserSerializer
 
 
@@ -15,3 +16,17 @@ def login(request):
         dj_login(request, user)
         return Response({'success': True})
     return Response({'success': False})
+
+
+@csrf_exempt
+@api_view(['POST'])
+def register(request):
+    UserSerializer(data=request.data).create(request.data)
+    return Response({'success': True})
+
+
+@csrf_exempt
+@api_view(['GET'])
+def get_users(request):
+    users = CustomUser.objects.all()
+    return Response(UserSerializer(users, many=True).data)
